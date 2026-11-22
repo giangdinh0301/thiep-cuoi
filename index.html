@@ -360,10 +360,15 @@ $("#couple").innerHTML = `
 
 /* Ảnh + nhạc: đọc bảng cài đặt trong Google Sheet (cột Y–AB), lỗi thì dùng CONFIG */
 const img = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
-function fillPhoto(el, id, w){ el.innerHTML = id ? `<img src="${img(id,w)}" alt="Ảnh cưới Giang & Phương" loading="lazy" referrerpolicy="no-referrer">` : ""; }
+let focus = {};   // căn dọc từng ảnh (0 = giữ phần đầu, 50 = giữa, 100 = phần chân) — cột AD trong sheet
+function fillPhoto(el, id, w){
+  const f = focus[id], pos = (f === undefined || f === "") ? "" : ` style="object-position:50% ${f}%"`;
+  el.innerHTML = id ? `<img src="${img(id,w)}" alt="Ảnh cưới Giang & Phương" loading="lazy" referrerpolicy="no-referrer"${pos}>` : "";
+}
 function openLB(id){ $("#lbInner").innerHTML = `<img src="${img(id,1600)}" alt="Ảnh cưới" referrerpolicy="no-referrer" style="width:auto;height:auto;max-width:100%;max-height:85vh">`; $("#lightbox").classList.add("on"); }
 $("#lightbox").onclick = e => { if (e.target.id === "lightbox" || e.target.classList.contains("x")) $("#lightbox").classList.remove("on"); };
 function renderMedia(cfg){
+  focus = cfg.focus || {};
   document.querySelectorAll("[data-photo]").forEach(el => { const id = cfg[el.dataset.photo]; fillPhoto(el, id, 700); el.style.display = id ? "" : "none"; });
   const album = $("#album"); album.innerHTML = "";
   (cfg.album || []).forEach(id => { const d = document.createElement("div"); d.className = "photo"; fillPhoto(d, id, 700); d.onclick = () => openLB(id); album.appendChild(d); });
