@@ -318,7 +318,9 @@ const CONFIG = {
       "1HJSaYqkkUo8KhXx-YbfLX74b8mpOT4Ke"
     ]
   },
-  music: "",   // ID file mp3 trên Drive; bảng cài đặt trong Google Sheet sẽ ghi đè
+  music: "1LV5-TeMjN0LaIDEvNIIxitdJ_r8ibTQN",   // ID file mp3 trên Drive; bảng cài đặt trong Google Sheet sẽ ghi đè
+  // File nhạc đã up lên repo (Vercel phát trực tiếp, nhanh). Dùng khi dòng "Nhạc nền" trong sheet trỏ đúng file Drive này.
+  musicLocal: { id: "1LV5-TeMjN0LaIDEvNIIxitdJ_r8ibTQN", file: "NGÀY XUÂN VUI TƯƠI - Nhạc Đám Cưới Nhẹ Nhàng.mp3" },
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbymHPEb1_H1sMZKrDABM4bjUy074K8ZIvrDkZnPzVb7EoxWJML3FNfVecbWWmExKxjSpA/exec"
 };
 
@@ -447,13 +449,19 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 })();
 
 /* Mở thiệp + nhạc (nút tắt/bật ở góc trên bên phải) */
-// Drive không cho phát mp3 trực tiếp, nên lấy file qua Apps Script (?action=audio → "mime;base64")
+// Ưu tiên file nhạc trên Vercel; bài khác thì lấy qua Apps Script (?action=audio → "mime;base64") vì Drive không cho phát trực tiếp
 const SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
 const audio = new Audio(); audio.loop = true;
 let ready = false, asked = "", opened = false, muted = false;
 function setupMusic(id){
   if (!id || asked === id) return; asked = id; ready = false;
   $("#music").classList.add("show"); syncBtn();
+  const loc = CONFIG.musicLocal;
+  if (loc && loc.id === id) {          // nhạc có sẵn trên Vercel → phát thẳng, không phải tải qua Apps Script
+    audio.preload = "auto"; audio.src = "/" + encodeURIComponent(loc.file); ready = true;
+    if (opened && !muted) play(); else syncBtn();
+    return;
+  }
   const start = () => loadAudio(id).then(blob => {
     if (asked !== id) return;
     audio.src = URL.createObjectURL(blob); ready = true;
