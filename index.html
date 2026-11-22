@@ -370,15 +370,23 @@ function renderMedia(cfg){
 }
 async function loadMedia(){
   const base = { cover1: CONFIG.photos.cover1, cover2: CONFIG.photos.cover2, album: CONFIG.photos.album, music: CONFIG.music };
+  // Lần mở sau: dùng ngay cấu hình đã nhớ, rồi mới hỏi Google Sheet xem có thay đổi không
+  let saved = null;
+  try { saved = localStorage.getItem("thiep-cfg"); } catch (e) {}
+  if (saved) { try { renderMedia(JSON.parse(saved)); } catch (e) { saved = null; } }
   try {
-    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 6000);
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 8000);
     const r = await fetch(CONFIG.rsvpEndpoint + "?action=config", { signal: ctl.signal }); clearTimeout(t);
     const c = await r.json();
-    if (c && (c.cover1 || c.cover2 || (c.album && c.album.length) || c.music)) return renderMedia(c);
+    if (c && (c.cover1 || c.cover2 || (c.album && c.album.length) || c.music)) {
+      const txt = JSON.stringify(c);
+      try { localStorage.setItem("thiep-cfg", txt); } catch (e) {}
+      if (txt !== saved) renderMedia(c);
+      return;
+    }
   } catch (err) {}
-  renderMedia(base);
+  if (!saved) renderMedia(base);
 }
-
 /* Lịch tháng 12/2026 */
 (function(){
   const y = 2026, m = 11;
@@ -442,18 +450,28 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 // Drive không cho phát mp3 trực tiếp, nên lấy file qua Apps Script (?action=audio → "mime;base64")
 const SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
 const audio = new Audio(); audio.loop = true;
-let ready = false, asked = false, opened = false, muted = false;
+let ready = false, asked = "", opened = false, muted = false;
 function setupMusic(id){
-  if (!id || asked) return; asked = true;
+  if (!id || asked === id) return; asked = id; ready = false;
   $("#music").classList.add("show"); syncBtn();
-  fetch(CONFIG.rsvpEndpoint + "?action=audio").then(r => r.text()).then(s => {
-    const i = s.indexOf(";"); if (i < 1) throw 0;
-    const bin = atob(s.slice(i + 1)), u8 = new Uint8Array(bin.length);
-    for (let k = 0; k < bin.length; k++) u8[k] = bin.charCodeAt(k);
-    audio.src = URL.createObjectURL(new Blob([u8], { type: s.slice(0, i) }));
-    ready = true;
+  const start = () => loadAudio(id).then(blob => {
+    if (asked !== id) return;
+    audio.src = URL.createObjectURL(blob); ready = true;
     if (opened && !muted) play(); else syncBtn();
-  }).catch(() => $("#music").classList.remove("show"));
+  }).catch(() => { if (asked === id) $("#music").classList.remove("show"); });
+  start();
+}
+// Lấy nhạc: có sẵn trong bộ nhớ đệm thì dùng ngay, chưa có thì tải 1 lần rồi lưu lại
+async function loadAudio(id){
+  const key = "/__music/" + id;
+  let cache = null;
+  try { cache = await caches.open("thiep-music"); const hit = await cache.match(key); if (hit) return await hit.blob(); } catch (e) {}
+  const s = await (await fetch(CONFIG.rsvpEndpoint + "?action=audio")).text();
+  const i = s.indexOf(";"); if (i < 1) throw new Error("no audio");
+  // trình duyệt tự giải mã base64 (chạy ngầm, không khoá giao diện)
+  const blob = await (await fetch("data:" + s.slice(0, i) + ";base64," + s.slice(i + 1))).blob();
+  try { if (cache) await cache.put(key, new Response(blob, { headers: { "Content-Type": blob.type } })); } catch (e) {}
+  return blob;
 }
 function play(){ audio.play().then(syncBtn).catch(syncBtn); }
 function syncBtn(){ $("#music").classList.toggle("muted", muted || (ready && audio.paused)); }
