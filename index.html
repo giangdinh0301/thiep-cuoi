@@ -439,23 +439,33 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 })();
 
 /* Mở thiệp + nhạc (nút tắt/bật ở góc trên bên phải) */
-let audio = null, opened = false, muted = false;
+// Drive không cho phát mp3 trực tiếp, nên lấy file qua Apps Script (?action=audio → "mime;base64")
+const SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
+const audio = new Audio(); audio.loop = true;
+let ready = false, asked = false, opened = false, muted = false;
 function setupMusic(id){
-  if (!id) return;
-  audio = new Audio(`https://drive.google.com/uc?export=download&id=${id}`);
-  audio.loop = true; audio.preload = "auto";
-  $("#music").classList.add("show");
-  if (opened && !muted) audio.play().catch(()=>{});
+  if (!id || asked) return; asked = true;
+  $("#music").classList.add("show"); syncBtn();
+  fetch(CONFIG.rsvpEndpoint + "?action=audio").then(r => r.text()).then(s => {
+    const i = s.indexOf(";"); if (i < 1) throw 0;
+    const bin = atob(s.slice(i + 1)), u8 = new Uint8Array(bin.length);
+    for (let k = 0; k < bin.length; k++) u8[k] = bin.charCodeAt(k);
+    audio.src = URL.createObjectURL(new Blob([u8], { type: s.slice(0, i) }));
+    ready = true;
+    if (opened && !muted) play(); else syncBtn();
+  }).catch(() => $("#music").classList.remove("show"));
 }
-function syncBtn(){ $("#music").classList.toggle("muted", muted || !audio || audio.paused); }
+function play(){ audio.play().then(syncBtn).catch(syncBtn); }
+function syncBtn(){ $("#music").classList.toggle("muted", muted || (ready && audio.paused)); }
 $("#openBtn").onclick = () => {
   $("#cover").classList.add("hide"); document.body.style.overflow = ""; opened = true;
-  if (audio && !muted) audio.play().then(syncBtn).catch(syncBtn);
+  if (ready) { if (!muted) play(); }
+  else { audio.src = SILENT; audio.play().catch(()=>{}); } // "mở khoá" âm thanh trên iPhone trong lúc nhạc đang tải
 };
 $("#music").onclick = () => {
-  if (!audio) return;
-  if (audio.paused) { muted = false; audio.play().then(syncBtn).catch(syncBtn); }
-  else { muted = true; audio.pause(); syncBtn(); }
+  if (ready && audio.paused) { muted = false; play(); }
+  else if (ready) { muted = true; audio.pause(); syncBtn(); }
+  else { muted = !muted; syncBtn(); }
 };
 document.body.style.overflow = "hidden";
 loadMedia();
