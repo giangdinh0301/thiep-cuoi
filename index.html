@@ -77,7 +77,8 @@ h2.sec{font-family:var(--f-serif);font-weight:500;font-size:19px;letter-spacing:
 .family{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
 .fam{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px 10px}
 .fam h3{font-family:var(--f-serif);font-weight:500;font-size:13px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
-.fam p{font-size:13px;margin-top:6px}
+.fam p{font-family:var(--f-serif);font-size:16px;font-weight:500;color:var(--wine-deep);margin-top:6px;line-height:1.35}
+.fam p i{font-style:italic;font-weight:400;font-size:14px;color:var(--muted);margin-right:3px}
 .fam .addr{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
 .couple{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-top:26px}
 .couple .role{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
@@ -153,11 +154,11 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 .petals{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
 .petal{position:absolute;top:-30px;width:14px;height:18px;opacity:.75;animation:fall linear infinite}
 @keyframes fall{0%{transform:translate(0,-30px) rotate(0)}100%{transform:translate(60px,110vh) rotate(540deg)}}
-#music{position:fixed;right:14px;bottom:16px;z-index:45;width:42px;height:42px;border-radius:50%;border:0;background:var(--paper);box-shadow:0 4px 14px rgba(0,0,0,.15);color:var(--wine);cursor:pointer;display:none;align-items:center;justify-content:center}
+#music{position:fixed;right:max(14px,calc(50vw - 206px));top:14px;z-index:45;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(251,248,244,.92);box-shadow:0 4px 14px rgba(0,0,0,.12);color:var(--wine);cursor:pointer;display:none;align-items:center;justify-content:center}
+#music .off{display:none}#music.muted .on{display:none}#music.muted .off{display:block}
 #music.show{display:flex}
-#music.play svg{animation:spin 4s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.petal,.cal td.hl:before,#music.play svg{animation:none}.reveal{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.petal,.cal td.hl:before{animation:none}.reveal{opacity:1;transform:none}}
 
 .ev .where{margin-top:10px;display:grid;gap:8px}
 .ev .loc{border-top:1px dashed var(--line);padding-top:8px}
@@ -179,7 +180,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 </div>
 
 <div class="petals" id="petals"></div>
-<button id="music" aria-label="Bật/tắt nhạc"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<button id="music" aria-label="Tắt/bật nhạc" title="Tắt/bật nhạc"><svg class="on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><svg class="off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg></button>
 
 <main class="card">
 
@@ -299,7 +300,7 @@ const CONFIG = {
     { title: "Tiệc cưới",    weekday: "Thứ Bảy",  date: "19 . 12 . 2026", lunar: "Tức ngày 11 tháng 11 năm Bính Ngọ",
       time: { gai: "", trai: "" } },
     { title: "Lễ thành hôn", weekday: "Chủ Nhật", date: "20 . 12 . 2026", lunar: "Tức ngày 12 tháng 11 năm Bính Ngọ",
-      time: { gai: "", trai: "" }, main: true }
+      time: { gai: "", trai: "" }, only: "trai", main: true }
   ],
   countdownTo: "2026-12-19T00:00:00+07:00",
   highlightDays: [19, 20],
@@ -317,7 +318,7 @@ const CONFIG = {
       "1HJSaYqkkUo8KhXx-YbfLX74b8mpOT4Ke"
     ]
   },
-  music: "",
+  music: "",   // ID file mp3 trên Drive; bảng cài đặt trong Google Sheet sẽ ghi đè
   rsvpEndpoint: "https://script.google.com/macros/s/AKfycbymHPEb1_H1sMZKrDABM4bjUy074K8ZIvrDkZnPzVb7EoxWJML3FNfVecbWWmExKxjSpA/exec"
 };
 
@@ -348,21 +349,35 @@ if (side) $("#fSide").value = side === "gai" ? "Nhà gái" : "Nhà trai";
 
 /* Gia đình + cô dâu chú rể */
 $("#family").innerHTML = famOrder.map(k => { const f = CONFIG.family[k]; return `
-  <div class="fam"><h3>${f.label}</h3><p>Ông ${esc(f.father)}</p><p>Bà ${esc(f.mother)}</p></div>`; }).join("");
+  <div class="fam"><h3>${f.label}</h3><p><i>Ông</i>${esc(f.father)}</p><p><i>Bà</i>${esc(f.mother)}</p></div>`; }).join("");
 const role = p => p === CONFIG.groom ? "Chú rể" : "Cô dâu";
 $("#couple").innerHTML = `
   <div><div class="role">${role(first)}</div><div class="nm">${esc(first.full)}</div></div>
   <div class="x">&amp;</div>
   <div><div class="role">${role(second)}</div><div class="nm">${esc(second.full)}</div></div>`;
 
-/* Ảnh (Google Drive) */
+/* Ảnh + nhạc: đọc bảng cài đặt trong Google Sheet (cột Y–AB), lỗi thì dùng CONFIG */
 const img = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
-function fillPhoto(el, id, w){ el.innerHTML = `<img src="${img(id,w)}" alt="Ảnh cưới Giang & Phương" loading="lazy" referrerpolicy="no-referrer">`; }
-document.querySelectorAll("[data-photo]").forEach(el => fillPhoto(el, CONFIG.photos[el.dataset.photo], 700));
-const album = $("#album");
-CONFIG.photos.album.forEach(id => { const d = document.createElement("div"); d.className = "photo"; fillPhoto(d, id, 700); d.onclick = () => openLB(id); album.appendChild(d); });
+function fillPhoto(el, id, w){ el.innerHTML = id ? `<img src="${img(id,w)}" alt="Ảnh cưới Giang & Phương" loading="lazy" referrerpolicy="no-referrer">` : ""; }
 function openLB(id){ $("#lbInner").innerHTML = `<img src="${img(id,1600)}" alt="Ảnh cưới" referrerpolicy="no-referrer" style="width:auto;height:auto;max-width:100%;max-height:85vh">`; $("#lightbox").classList.add("on"); }
 $("#lightbox").onclick = e => { if (e.target.id === "lightbox" || e.target.classList.contains("x")) $("#lightbox").classList.remove("on"); };
+function renderMedia(cfg){
+  document.querySelectorAll("[data-photo]").forEach(el => { const id = cfg[el.dataset.photo]; fillPhoto(el, id, 700); el.style.display = id ? "" : "none"; });
+  const album = $("#album"); album.innerHTML = "";
+  (cfg.album || []).forEach(id => { const d = document.createElement("div"); d.className = "photo"; fillPhoto(d, id, 700); d.onclick = () => openLB(id); album.appendChild(d); });
+  album.closest("section").style.display = (cfg.album || []).length ? "" : "none";
+  setupMusic(cfg.music);
+}
+async function loadMedia(){
+  const base = { cover1: CONFIG.photos.cover1, cover2: CONFIG.photos.cover2, album: CONFIG.photos.album, music: CONFIG.music };
+  try {
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 6000);
+    const r = await fetch(CONFIG.rsvpEndpoint + "?action=config", { signal: ctl.signal }); clearTimeout(t);
+    const c = await r.json();
+    if (c && (c.cover1 || c.cover2 || (c.album && c.album.length) || c.music)) return renderMedia(c);
+  } catch (err) {}
+  renderMedia(base);
+}
 
 /* Lịch tháng 12/2026 */
 (function(){
@@ -396,7 +411,7 @@ $("#events").innerHTML = CONFIG.events.map(e => `
     <div class="t">${e.title}</div>
     <div class="time">${e.weekday}, ${e.date}</div>
     <div class="lunar2">(${e.lunar})</div>
-    <div class="where">${hosts.map(k => { const f = CONFIG.family[k]; const t = e.time[k];
+    <div class="where">${(e.only ? [e.only] : hosts).map(k => { const f = CONFIG.family[k]; const t = e.time[k];
       return `<div class="loc">
         <div class="place">Tại tư gia ${f.label.toLowerCase()}</div>
         <div class="day">${t ? "Vào lúc " + t : "Giờ cụ thể sẽ cập nhật sau"}</div>
@@ -423,13 +438,27 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   }
 })();
 
-/* Mở thiệp + nhạc */
-let audio = null;
-if (CONFIG.music){ audio = new Audio(CONFIG.music); audio.loop = true; $("#music").classList.add("show"); }
-function setPlay(on){ if(!audio) return; (on ? audio.play() : (audio.pause(), Promise.resolve())).then(()=>$("#music").classList.toggle("play", on)).catch(()=>{}); }
-$("#openBtn").onclick = () => { $("#cover").classList.add("hide"); document.body.style.overflow = ""; setPlay(true); };
-$("#music").onclick = () => setPlay(audio && audio.paused);
+/* Mở thiệp + nhạc (nút tắt/bật ở góc trên bên phải) */
+let audio = null, opened = false, muted = false;
+function setupMusic(id){
+  if (!id) return;
+  audio = new Audio(`https://drive.google.com/uc?export=download&id=${id}`);
+  audio.loop = true; audio.preload = "auto";
+  $("#music").classList.add("show");
+  if (opened && !muted) audio.play().catch(()=>{});
+}
+function syncBtn(){ $("#music").classList.toggle("muted", muted || !audio || audio.paused); }
+$("#openBtn").onclick = () => {
+  $("#cover").classList.add("hide"); document.body.style.overflow = ""; opened = true;
+  if (audio && !muted) audio.play().then(syncBtn).catch(syncBtn);
+};
+$("#music").onclick = () => {
+  if (!audio) return;
+  if (audio.paused) { muted = false; audio.play().then(syncBtn).catch(syncBtn); }
+  else { muted = true; audio.pause(); syncBtn(); }
+};
 document.body.style.overflow = "hidden";
+loadMedia();
 
 /* RSVP */
 document.querySelectorAll('input[name=attend]').forEach(r => r.onchange = () => {
