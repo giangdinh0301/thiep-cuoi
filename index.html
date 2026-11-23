@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thiệp cưới Giang & Phương</title>
-<meta name="description" content="Trân trọng kính mời bạn đến dự lễ cưới của Đinh Đắc Giang & Bùi Thị Phương · 19 & 20.12.2026">
-<meta property="og:title" content="Thiệp cưới Giang & Phương · 19 & 20.12.2026">
+<title>Thiệp cưới Đinh Giang & Bùi Phương</title>
+<meta name="description" content="Trân trọng kính mời bạn đến dự lễ cưới của Đinh Đắc Giang & Bùi Thị Phương · 20.12.2026">
+<meta property="og:title" content="Thiệp cưới Đinh Giang & Bùi Phương · 20.12.2026">
 <meta property="og:description" content="Trân trọng kính mời bạn đến chung vui cùng gia đình chúng tôi">
 <meta property="og:image" content="https://lh3.googleusercontent.com/d/1FVF12WEQrZJGeWXHZFNgV0jlDK6imMum=w1200">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,8 @@ h2.sec{font-family:var(--f-serif);font-weight:500;font-size:19px;letter-spacing:
 .env-box:before{content:"";position:absolute;left:0;right:0;top:0;height:0;border-left:165px solid transparent;border-right:165px solid transparent;border-top:120px solid #8A2A31;border-left-width:min(165px,42vw);border-right-width:min(165px,42vw)}
 .env-box:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 2px,transparent 2px 8px)}
 .seal{position:absolute;left:50%;top:104px;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d9b77c,#a37a3f 70%);display:flex;align-items:center;justify-content:center;font-family:var(--f-serif);font-size:20px;color:#fff;letter-spacing:.05em;box-shadow:0 3px 10px rgba(0,0,0,.25);z-index:2;border:2px solid rgba(255,255,255,.35)}
+.wax{position:absolute;left:50%;top:112px;transform:translate(-50%,-50%);width:86px;height:86px;z-index:2;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+.wax svg{width:100%;height:100%;display:block}
 .env .to{margin-top:26px;font-family:var(--f-serif);font-size:15px;color:var(--muted);font-style:italic}
 .env .guest{font-family:var(--f-script);font-size:30px;line-height:1.25;color:var(--wine);margin-top:2px}
 .btn{display:inline-block;border:0;cursor:pointer;font-family:var(--f-sans);font-weight:400;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:11px 26px;border-radius:30px;background:var(--wine);color:#fff;transition:.25s;text-decoration:none}
@@ -115,6 +117,8 @@ h2.sec{font-family:var(--f-serif);font-weight:500;font-size:19px;letter-spacing:
 .ev .time{font-family:var(--f-serif);font-size:24px;color:var(--ink);margin-top:6px;line-height:1.2}
 .ev .day{font-size:12.5px;color:var(--muted)}
 .ev .place{font-size:13px;margin-top:8px}
+.ev .at{font-family:var(--f-serif);font-size:22px;margin-top:6px;line-height:1.2}
+.main-ev .at{color:#fff}
 .ev .addr{font-size:12px;color:var(--muted);line-height:1.5}
 .ev .btn{margin-top:12px;padding:8px 18px;font-size:11.5px}
 .main-ev{background:var(--wine);color:#fff;border:0}
@@ -165,6 +169,18 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 .main-ev .loc{border-top-color:rgba(255,255,255,.3)}
 .ev .lunar2{font-family:var(--f-serif);font-style:italic;font-size:13px;opacity:.85}
 .hero-photos .photo{background:#e9dfd6}
+
+/* ---------- Lịch trình ---------- */
+.sched{background:#4A1519;border-radius:14px;padding:26px 16px 18px;box-shadow:0 10px 26px rgba(74,21,25,.28)}
+.sched h2.sec{color:#F6ECE0;font-size:16px;letter-spacing:.14em}
+.tl{margin-top:16px}
+.tl .r{position:relative;display:grid;grid-template-columns:34px 62px 20px 1fr;align-items:center;column-gap:4px;padding:11px 0;text-align:left}
+.tl .ic{display:flex;justify-content:flex-end}
+.tl .ic svg{width:26px;height:26px;stroke:#EBD9BE;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.tl .tm{font-family:var(--f-serif);font-size:19px;font-weight:500;color:#F6ECE0;text-align:right;padding-right:6px}
+.tl .d{justify-self:center;width:10px;height:10px;border-radius:50%;background:#F6ECE0;position:relative;z-index:1;box-shadow:0 0 0 3px rgba(246,236,224,.15)}
+.tl .tx{font-size:13.5px;color:#E7D5C4;padding-left:8px}
+.tl .r:not(:last-child):after{content:"";position:absolute;left:114px;top:50%;height:100%;width:1px;background:rgba(246,236,224,.35)}
 </style>
 </head>
 <body>
@@ -172,7 +188,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 <!-- Bìa phong bì -->
 <div id="cover">
   <div class="env">
-    <div class="env-box"><div class="seal" data-bind="monogram"></div></div>
+    <div class="env-box"><div class="wax"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="wg" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#f1dba0"/><stop offset=".45" stop-color="#c9a15a"/><stop offset="1" stop-color="#8d6527"/></radialGradient><linearGradient id="wr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a6126"/><stop offset="1" stop-color="#f0d89b"/></linearGradient></defs><path d="M96.2 50.0 L96.5 52.4 L96.3 54.9 L95.5 57.2 L94.4 59.4 L93.1 61.6 L92.0 63.7 L91.2 65.8 L90.7 68.1 L90.1 70.4 L89.3 72.7 L88.1 74.7 L86.4 76.5 L84.4 77.8 L82.2 79.0 L80.2 80.2 L78.3 81.5 L76.7 82.9 L75.1 84.5 L73.5 86.2 L71.8 87.7 L69.9 89.1 L68.0 90.4 L66.1 91.8 L64.1 93.3 L62.0 94.7 L59.8 95.9 L57.4 96.7 L54.9 96.7 L52.4 96.2 L50.0 95.2 L47.7 94.2 L45.4 93.3 L43.2 92.8 L40.9 92.6 L38.6 92.5 L36.3 92.3 L34.0 91.6 L32.0 90.5 L30.1 89.1 L28.3 87.5 L26.6 86.1 L24.7 84.8 L22.8 83.6 L20.9 82.4 L19.0 81.0 L17.2 79.5 L15.6 77.9 L13.9 76.2 L12.2 74.6 L10.3 72.9 L8.5 71.2 L6.8 69.2 L5.8 67.0 L5.3 64.5 L5.5 61.9 L6.2 59.3 L6.9 56.8 L7.4 54.5 L7.5 52.2 L7.2 50.0 L6.8 47.7 L6.6 45.4 L6.7 43.1 L7.1 40.9 L7.7 38.7 L8.5 36.5 L9.2 34.3 L9.8 32.1 L10.5 29.9 L11.3 27.7 L12.5 25.6 L13.8 23.7 L15.3 21.9 L16.8 20.1 L18.1 18.1 L19.4 16.0 L20.7 13.9 L22.4 12.0 L24.4 10.5 L26.7 9.7 L29.3 9.5 L32.0 9.6 L34.6 9.8 L36.9 9.7 L39.1 9.3 L41.2 8.6 L43.3 7.8 L45.5 7.0 L47.7 6.5 L50.0 6.2 L52.3 6.1 L54.6 6.0 L57.0 5.9 L59.4 5.8 L61.8 6.0 L64.1 6.5 L66.3 7.5 L68.4 8.7 L70.3 10.1 L72.3 11.4 L74.4 12.4 L76.6 13.4 L78.9 14.3 L81.0 15.6 L82.8 17.2 L84.0 19.3 L84.8 21.8 L85.4 24.3 L85.8 26.7 L86.5 28.9 L87.4 30.9 L88.6 32.8 L89.9 34.7 L91.1 36.7 L92.1 38.7 L93.0 40.9 L93.8 43.1 L94.7 45.3 L95.5 47.6Z" fill="url(#wg)"/><circle cx="50" cy="50" r="36" fill="none" stroke="url(#wr)" stroke-width="2.4"/><path d="M50 70C30 56 25 46 25 38C25 31.5 30 27 36 27C42 27 47 31 50 36C53 31 58 27 64 27C70 27 75 31.5 75 38C75 46 70 56 50 70Z" fill="none" stroke="#7d5420" stroke-width="3.2" stroke-linejoin="round" transform="translate(.8 .8)"/><path d="M50 70C30 56 25 46 25 38C25 31.5 30 27 36 27C42 27 47 31 50 36C53 31 58 27 64 27C70 27 75 31.5 75 38C75 46 70 56 50 70Z" fill="none" stroke="#f4e0a6" stroke-width="2.6" stroke-linejoin="round"/><path d="M50 70C30 56 25 46 25 38C25 31.5 30 27 36 27C42 27 47 31 50 36C53 31 58 27 64 27C70 27 75 31.5 75 38C75 46 70 56 50 70Z" fill="none" stroke="#7d5420" stroke-width="1.6" stroke-linejoin="round" transform="translate(50 50) scale(.74) translate(-50 -48.5)"/><path d="M50 70C30 56 25 46 25 38C25 31.5 30 27 36 27C42 27 47 31 50 36C53 31 58 27 64 27C70 27 75 31.5 75 38C75 46 70 56 50 70Z" fill="none" stroke="#f4e0a6" stroke-width="1.1" stroke-linejoin="round" transform="translate(49.6 49.6) scale(.74) translate(-50 -48.5)"/></svg></div></div>
     <div class="to">Thân gửi</div>
     <div class="guest" data-bind="guest">Quý khách</div>
     <button class="btn" id="openBtn">Mở thiệp</button>
@@ -198,7 +214,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
     </div>
     <div class="date-strip reveal">
       <span class="side">Tháng 12</span>
-      <span class="d">19 &amp; 20</span>
+      <span class="d">20</span>
       <span class="side">2026</span>
     </div>
   </section>
@@ -206,11 +222,11 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   <!-- 2. Thông tin lễ cưới -->
   <section>
     <h2 class="sec reveal">Thông tin lễ cưới</h2>
-    <div class="sub reveal"></div>
+    <div class="sub reveal">Hai mái nhà, một gia đình</div>
     <div class="family reveal" id="family"></div>
-    <p class="small muted reveal" style="margin-top:22px">Trân trọng kính mời Quý khách tới dự lễ thành hôn của hai con chúng tôi</p>
+    <p class="small muted reveal" style="margin-top:22px">Trân trọng báo tin lễ thành hôn của con chúng tôi</p>
     <div class="couple reveal" id="couple"></div>
-    <div class="quote reveal">Sự hiện diện của Quý vị là niềm vinh hạnh cho <br /> gia đình chúng tôi!</div>
+    <div class="quote reveal">Sự hiện diện của Quý vị là niềm vinh hạnh cho gia đình chúng tôi!</div>
   </section>
 
   <!-- 3. Lịch + đếm ngược -->
@@ -231,9 +247,17 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 
   <!-- 4. Sự kiện -->
   <section>
-    <h2 class="sec reveal">Thời gian & địa điểm</h2>
-    <div class="sub reveal">Rất mong được đón tiếp Quý khách</div>
+    <h2 class="sec reveal">Thời gian &amp; địa điểm</h2>
+    <div class="sub reveal">Rất mong được đón tiếp bạn</div>
     <div class="events" id="events"></div>
+  </section>
+
+  <!-- 4b. Lịch trình (chỉnh giờ / chữ / ẩn hiện trong Google Sheet, cột AF–AJ) -->
+  <section id="schedule" style="display:none;padding-top:0">
+    <div class="sched reveal">
+      <h2 class="sec">Lịch trình ngày cưới</h2>
+      <div class="tl" id="scheduleList"></div>
+    </div>
   </section>
 
   <!-- 5. Album -->
@@ -246,7 +270,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   <!-- 6. RSVP -->
   <section id="rsvp">
     <h2 class="sec reveal">Xác nhận tham dự</h2>
-    <div class="sub reveal">Quý khách vui lòng phản hồi sớm để gia đình chuẩn bị chu đáo nhé</div>
+    <div class="sub reveal">Bạn vui lòng phản hồi sớm để gia đình chuẩn bị chu đáo nhé</div>
     <form id="rsvpForm" class="reveal" novalidate>
       <label for="fName">Họ và tên *</label>
       <input type="text" id="fName" name="name" placeholder="Nhập tên của bạn" required>
@@ -269,7 +293,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   <!-- 7. Cảm ơn -->
   <section class="thanks">
     <div class="script reveal">Thank you</div>
-    <p class="reveal">Cảm ơn bạn đã dành thời gian ghé thăm thiệp cưới của chúng mình. Sự hiện diện và lời chúc của bạn là món quà ý nghĩa nhất trong ngày trọng đại này.</p>
+    <p class="reveal">Gia đình chúng tôi xin chân thành cảm ơn cô dì, chú bác, bạn bè và đồng nghiệp đã đến tham dự, chung vui và gửi những lời chúc tốt đẹp trong ngày trọng đại này.</p>
     <div class="divider" style="color:#e5c99a">❦</div>
     <div class="serif" style="font-size:16px;letter-spacing:.15em" data-bind="coupleShort"></div>
   </section>
@@ -282,28 +306,31 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 /* =========================================================
    CONFIG — THÔNG TIN THIỆP (sửa tại đây)
    Link cá nhân: ?to=Tên khách&k=mã khách&s=gai|trai
-   s=gai  → tên cô dâu trước, sự kiện tại tư gia nhà gái
-   s=trai → tên chú rể trước, sự kiện tại tư gia nhà trai
-   không có s → hiện cả hai nhà
+   s=gai  → tên cô dâu trước
+   s=trai → tên chú rể trước
+   không có s → tên chú rể trước
    ========================================================= */
 const CONFIG = {
-  groom: { full: "Đinh Đắc Giang", short: "Giang", initial: "G" },
-  bride: { full: "Bùi Thị Phương", short: "Phương", initial: "P" },
+  groom: { full: "Đinh Đắc Giang", short: "Đinh Giang", initial: "G" },
+  bride: { full: "Bùi Thị Phương", short: "Bùi Phương", initial: "P" },
   family: {
     trai: { label: "Nhà trai", father: "Đinh Quang Thìn", mother: "Nguyễn Thị Hoà",
             map: "https://maps.app.goo.gl/7T6KWhmbaXKgToN5A?g_st=ic" },
     gai:  { label: "Nhà gái",  father: "Bùi Văn Tuyến",   mother: "Trần Thị Phượng",
             map: "https://maps.app.goo.gl/aSJBDsQsiAq1RRoS8?g_st=ic" }
   },
-  // Giờ để trống = hiện "Giờ cụ thể sẽ cập nhật sau". Điền dạng "17:00" khi có.
+  // Giờ để trống = hiện "Giờ cụ thể sẽ cập nhật sau". Điền dạng "16:00".
+  // map: link chỉ đường. Tiệc cưới đang dùng link tìm kiếm Google Maps theo địa chỉ; có link chia sẻ chính xác thì dán thay vào.
   events: [
-    { title: "Tiệc cưới",    weekday: "Thứ Bảy",  date: "19 . 12 . 2026", lunar: "Tức ngày 11 tháng 11 năm Bính Ngọ",
-      time: { gai: "", trai: "" } },
     { title: "Lễ thành hôn", weekday: "Chủ Nhật", date: "20 . 12 . 2026", lunar: "Tức ngày 12 tháng 11 năm Bính Ngọ",
-      time: { gai: "", trai: "" }, only: "trai", main: true }
+      time: "16:00", place: "Tại tư gia nhà trai", addr: "",
+      map: "https://maps.app.goo.gl/7T6KWhmbaXKgToN5A?g_st=ic", btn: "Chỉ đường đến nhà trai", main: true },
+    { title: "Tiệc cưới", weekday: "Chủ Nhật", date: "20 . 12 . 2026", lunar: "Tức ngày 12 tháng 11 năm Bính Ngọ",
+      time: "16:00", place: "Trung tâm tiệc cưới DIAMOND PALACE", addr: "Khu đô thị Hoài Nam, P. Xuân Hòa, Phú Thọ",
+      map: "https://www.google.com/maps/search/?api=1&query=Trung%20t%C3%A2m%20ti%E1%BB%87c%20c%C6%B0%E1%BB%9Bi%20Diamond%20Palace%20khu%20%C4%91%C3%B4%20th%E1%BB%8B%20Ho%C3%A0i%20Nam%2C%20P.%20Xu%C3%A2n%20H%C3%B2a%2C%20Ph%C3%BA%20Th%E1%BB%8D", btn: "Chỉ đường đến nhà hàng" }
   ],
-  countdownTo: "2026-12-19T00:00:00+07:00",
-  highlightDays: [19, 20],
+  countdownTo: "2026-12-20T16:00:00+07:00",
+  highlightDays: [20],
 
   // Ảnh lấy từ Google Drive (ID file). Link chia sẻ "bất kỳ ai có đường liên kết".
   photos: {
@@ -363,12 +390,26 @@ const img = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
 let focus = {};   // căn dọc từng ảnh (0 = giữ phần đầu, 50 = giữa, 100 = phần chân) — cột AD trong sheet
 function fillPhoto(el, id, w){
   const f = focus[id], pos = (f === undefined || f === "") ? "" : ` style="object-position:50% ${f}%"`;
-  el.innerHTML = id ? `<img src="${img(id,w)}" alt="Ảnh cưới Giang & Phương" loading="lazy" referrerpolicy="no-referrer"${pos}>` : "";
+  el.innerHTML = id ? `<img src="${img(id,w)}" alt="Ảnh cưới Đinh Giang & Bùi Phương" loading="lazy" referrerpolicy="no-referrer"${pos}>` : "";
 }
 function openLB(id){ $("#lbInner").innerHTML = `<img src="${img(id,1600)}" alt="Ảnh cưới" referrerpolicy="no-referrer" style="width:auto;height:auto;max-width:100%;max-height:85vh">`; $("#lightbox").classList.add("on"); }
 $("#lightbox").onclick = e => { if (e.target.id === "lightbox" || e.target.classList.contains("x")) $("#lightbox").classList.remove("on"); };
+const ICONS = {
+  "máy ảnh": '<svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12" rx="2"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7.5 10 4.5h4l1.5 3"/></svg>',
+  "bánh cưới": '<svg viewBox="0 0 24 24"><path d="M4 20.5h16M6 20.5v-5h12v5M8.5 15.5v-4h7v4M12 11.5V8.5"/><path d="M12 8.5c-1.3-1.2-1-2.6 0-3.8 1 1.2 1.3 2.6 0 3.8z"/></svg>',
+  "ly rượu": '<svg viewBox="0 0 24 24"><path d="M8 3.5h8l-.8 6a3.2 3.2 0 0 1-6.4 0L8 3.5z"/><path d="M12 13v7M8.5 20.5h7"/></svg>',
+  "nhẫn": '<svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="5.2"/><path d="M9.5 6.5 12 3.5l2.5 3-2.5 2.5z"/></svg>',
+  "trái tim": '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>'
+};
+function renderSchedule(list){
+  const sec = $("#schedule"), box = $("#scheduleList");
+  if (!list || !list.length){ sec.style.display = "none"; box.innerHTML = ""; return; }
+  box.innerHTML = list.map(x => `<div class="r"><span class="ic">${ICONS[String(x.icon || "").trim().toLowerCase()] || ""}</span><span class="tm">${esc(x.time || "")}</span><span class="d"></span><span class="tx">${esc(x.text)}</span></div>`).join("");
+  sec.style.display = "";
+}
 function renderMedia(cfg){
   focus = cfg.focus || {};
+  renderSchedule(cfg.schedule);
   document.querySelectorAll("[data-photo]").forEach(el => { const id = cfg[el.dataset.photo]; fillPhoto(el, id, 700); el.style.display = id ? "" : "none"; });
   const album = $("#album"); album.innerHTML = "";
   (cfg.album || []).forEach(id => { const d = document.createElement("div"); d.className = "photo"; fillPhoto(d, id, 700); d.onclick = () => openLB(id); album.appendChild(d); });
@@ -420,18 +461,17 @@ function tick(){
 tick(); setInterval(tick, 1000);
 
 /* Sự kiện */
-const hosts = side ? [side] : famOrder;
 $("#events").innerHTML = CONFIG.events.map(e => `
   <div class="ev reveal ${e.main?"main-ev":""}">
-    <div class="t">${e.title}</div>
-    <div class="time">${e.weekday}, ${e.date}</div>
-    <div class="lunar2">(${e.lunar})</div>
-    <div class="where">${(e.only ? [e.only] : hosts).map(k => { const f = CONFIG.family[k]; const t = e.time[k];
-      return `<div class="loc">
-        <div class="place">Tại tư gia ${f.label.toLowerCase()}</div>
-        <div class="day">${t ? "Vào lúc " + t : "Giờ cụ thể sẽ cập nhật sau"}</div>
-        <a class="btn ${e.main?"":"ghost"}" href="${f.map}" target="_blank" rel="noopener">Chỉ đường đến ${f.label.toLowerCase()} →</a>
-      </div>`; }).join("")}</div>
+    <div class="t">${esc(e.title)}</div>
+    <div class="time">${esc(e.weekday)}, ${esc(e.date)}</div>
+    <div class="lunar2">(${esc(e.lunar)})</div>
+    <div class="where"><div class="loc">
+      <div class="at">${e.time ? "Vào lúc " + esc(e.time) : "Giờ cụ thể sẽ cập nhật sau"}</div>
+      <div class="place">${esc(e.place)}</div>
+      ${e.addr ? `<div class="addr">${esc(e.addr)}</div>` : ""}
+      <a class="btn ${e.main?"":"ghost"}" href="${e.map}" target="_blank" rel="noopener">${esc(e.btn)} →</a>
+    </div></div>
   </div>`).join("");
 
 /* Hiệu ứng xuất hiện khi cuộn */
