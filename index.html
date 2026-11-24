@@ -17,7 +17,7 @@
    Font: Great Vibes (tên), Cormorant Garamond (tiêu đề), Be Vietnam Pro 300 (nội dung)
    ========================================================= */
 :root{
-  --cream:#EFE9E1; --cream-2:#E7DDD1; --paper:#FBF8F4;
+  --cream:#FFF9F4; --cream-2:#F3E7DA; --paper:#FBF1E7;
   --wine:#7A1F26; --wine-deep:#4A1A1E; --rose:#B76E6E; --gold:#B08D57;
   --ink:#3E2F2C; --muted:#8A7B74; --line:rgba(122,31,38,.18);
   --f-script:'Great Vibes',cursive;
@@ -147,6 +147,22 @@ form .btn{width:100%;margin-top:18px}
 .msg{display:none;margin-top:16px;padding:14px;border-radius:6px;background:#F3E9E4;color:var(--wine);font-size:13px;text-align:center}
 .msg.on{display:block}
 
+/* ---------- Nền ảnh ---------- */
+.band{position:relative;width:100%;overflow:hidden;background:var(--cream-2)}
+.band.l{aspect-ratio:3/2}.band.p{aspect-ratio:2/3}
+.band img,.band .bimg{width:100%;height:100%;object-fit:cover;display:block}
+.band:before,.band:after{content:"";position:absolute;left:0;right:0;height:16%;z-index:1;pointer-events:none}
+.band:before{top:0;background:linear-gradient(var(--fa,var(--cream)),transparent)}
+.band:after{bottom:0;background:linear-gradient(transparent,var(--fb,var(--cream)))}
+.band .cap{position:absolute;left:0;right:0;top:19%;z-index:2;text-align:center;font-family:var(--f-script);font-size:46px;color:#fff;text-shadow:0 1px 3px rgba(60,30,20,.45),0 2px 18px rgba(60,30,20,.4)}
+.photobg{color:#fff;overflow:hidden}
+.photobg .bgimg{position:absolute;inset:0;z-index:0}
+.photobg .bgimg img{width:100%;height:100%;object-fit:cover;display:block}
+.photobg:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(74,26,30,.62),rgba(74,26,30,.5) 45%,rgba(74,26,30,.72))}
+.photobg>*:not(.bgimg){position:relative;z-index:2}
+.photobg h2.sec,.photobg .sub{color:#fff}
+.photobg .countdown div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(2px)}
+
 /* ---------- Cảm ơn ---------- */
 .thanks{background:var(--wine);color:#fff;padding:0;overflow:hidden}
 .thanks .tph{position:relative;width:100%;aspect-ratio:2/3;background:var(--wine)}
@@ -226,6 +242,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
     </div>
   </section>
 
+  <div class="band l" data-photo="bandTop"></div>
+
   <!-- 2. Thông tin lễ cưới -->
   <section>
     <h2 class="sec reveal">Thông tin lễ cưới</h2>
@@ -237,7 +255,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 3. Lịch + đếm ngược -->
-  <section style="background:var(--paper)">
+  <section class="photobg">
+    <div class="bgimg" data-photo="calBg"></div>
     <h2 class="sec reveal">Ngày chung đôi</h2>
     <div class="sub reveal">Tháng 12 năm 2026</div>
     <div class="cal reveal" style="background:#fff">
@@ -266,6 +285,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
       <div class="tl" id="scheduleList"></div>
     </div>
   </section>
+
+  <div class="band p" style="--fb:var(--paper)"><div class="bimg" data-photo="bandMid"></div><div class="cap">Forever &amp; always</div></div>
 
   <!-- 5. Album -->
   <section style="background:var(--paper)">
@@ -347,6 +368,9 @@ const CONFIG = {
     cover1: "1FVF12WEQrZJGeWXHZFNgV0jlDK6imMum",
     cover2: "1l2FOZCCQxP8NGQXip-_DQqQtz0N2GQJq",
     thanks: "1VxlEaqmtDA_NHd7guvHWGM0w37Rp-UUP",   // ảnh cuối trang (mục Thank you)
+    bandTop: "1qr2J54G-Mx_4HULyLEBVjwK2PV3Ydl2M",  // ảnh ngang tràn khung, dưới phần ngày cưới
+    calBg:   "11Qstgfba3z0-OqvX5FfyGTY80wBNgzXp",  // ảnh nền mục "Ngày chung đôi"
+    bandMid: "1oUwtv44lniKLGN0n75qroHiCbWci-Zzk",  // ảnh dọc tràn khung, trước Album
     album: [
       "1_R4-oQCmlZIvY2tvQpQVr0MDrywYqIsS", "16OpF5izMEwNJbJlsD8bu3SoeXbKaS4bg",
       "17G8VFJFQZqM2eCnN-HtaeuG9621rCB1Z", "1hd_ZaLhVIUose2_MiZGjSovFS2Dq4wxo",
@@ -422,7 +446,7 @@ fillPhoto($("#thanksPhoto"), CONFIG.photos.thanks, 900);
 function renderMedia(cfg){
   focus = cfg.focus || {};
   renderSchedule(cfg.schedule);
-  document.querySelectorAll("[data-photo]").forEach(el => { const id = cfg[el.dataset.photo]; fillPhoto(el, id, 700); el.style.display = id ? "" : "none"; });
+  document.querySelectorAll("[data-photo]").forEach(el => { const id = cfg[el.dataset.photo] || CONFIG.photos[el.dataset.photo]; fillPhoto(el, id, el.dataset.photo === "cover1" || el.dataset.photo === "cover2" ? 700 : 1000); el.style.display = id ? "" : "none"; });
   const album = $("#album"); album.innerHTML = "";
   (cfg.album || []).forEach(id => { const d = document.createElement("div"); d.className = "photo"; fillPhoto(d, id, 700); d.onclick = () => openLB(id); album.appendChild(d); });
   album.closest("section").style.display = (cfg.album || []).length ? "" : "none";
