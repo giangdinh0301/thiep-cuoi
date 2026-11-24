@@ -148,9 +148,14 @@ form .btn{width:100%;margin-top:18px}
 .msg.on{display:block}
 
 /* ---------- Cảm ơn ---------- */
-.thanks{background:var(--wine);color:#fff}
-.thanks .script{color:#fff;font-size:46px}
-.thanks p{font-size:13.5px;opacity:.9;margin-top:12px}
+.thanks{background:var(--wine);color:#fff;padding:0;overflow:hidden}
+.thanks .tph{position:relative;width:100%;aspect-ratio:2/3;background:var(--wine)}
+.thanks .tph img{width:100%;height:100%;object-fit:cover;display:block}
+.thanks .tph:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5%;background:linear-gradient(to bottom,rgba(122,31,38,0),#7A1F26)}
+.thanks .tx{position:relative;z-index:2;padding:4px 32px 34px;margin-top:-2px}
+.thanks .script{color:#fff;font-size:36px}
+.thanks p{font-size:12px;line-height:1.7;opacity:.9;margin-top:6px}
+.thanks .divider{margin:12px 0 10px}
 footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);background:var(--cream-2)}
 
 /* ---------- Hiệu ứng ---------- */
@@ -294,10 +299,13 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 
   <!-- 7. Cảm ơn -->
   <section class="thanks">
-    <div class="script reveal">Thank you</div>
-    <p class="reveal">Gia đình chúng tôi xin chân thành cảm ơn cô dì, chú bác, bạn bè và đồng nghiệp đã đến tham dự, chung vui và gửi những lời chúc tốt đẹp trong ngày trọng đại này.</p>
-    <div class="divider" style="color:#e5c99a">❦</div>
-    <div class="serif" style="font-size:16px;letter-spacing:.15em" data-bind="coupleShort"></div>
+    <div class="tph" id="thanksPhoto"></div>
+    <div class="tx">
+      <div class="script reveal">Thank you</div>
+      <p class="reveal">Gia đình chúng tôi xin chân thành cảm ơn cô dì, chú bác, bạn bè và đồng nghiệp đã đến tham dự, chung vui và gửi những lời chúc tốt đẹp trong ngày trọng đại này.</p>
+      <div class="divider" style="color:#e5c99a">❦</div>
+      <div class="serif" style="font-size:15px;letter-spacing:.15em" data-bind="coupleShort"></div>
+    </div>
   </section>
   <footer>Made with love · 2026</footer>
 </main>
@@ -338,6 +346,7 @@ const CONFIG = {
   photos: {
     cover1: "1FVF12WEQrZJGeWXHZFNgV0jlDK6imMum",
     cover2: "1l2FOZCCQxP8NGQXip-_DQqQtz0N2GQJq",
+    thanks: "1VxlEaqmtDA_NHd7guvHWGM0w37Rp-UUP",   // ảnh cuối trang (mục Thank you)
     album: [
       "1_R4-oQCmlZIvY2tvQpQVr0MDrywYqIsS", "16OpF5izMEwNJbJlsD8bu3SoeXbKaS4bg",
       "17G8VFJFQZqM2eCnN-HtaeuG9621rCB1Z", "1hd_ZaLhVIUose2_MiZGjSovFS2Dq4wxo",
@@ -409,6 +418,7 @@ function renderSchedule(list){
   box.innerHTML = list.map(x => `<div class="r"><span class="ic">${ICONS[String(x.icon || "").trim().toLowerCase()] || ""}</span><span class="tm">${esc(x.time || "")}</span><span class="d"></span><span class="tx">${esc(x.text)}</span></div>`).join("");
   sec.style.display = "";
 }
+fillPhoto($("#thanksPhoto"), CONFIG.photos.thanks, 900);
 function renderMedia(cfg){
   focus = cfg.focus || {};
   renderSchedule(cfg.schedule);
