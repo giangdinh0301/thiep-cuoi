@@ -70,9 +70,10 @@ h2.sec{font-family:var(--f-serif);font-weight:500;font-size:19px;letter-spacing:
 .hero-photos .p1{position:absolute;left:6px;top:20px;width:58%;height:230px;transform:rotate(-4deg);border:6px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.12)}
 .hero-photos .p2{position:absolute;right:6px;top:0;width:52%;height:200px;transform:rotate(5deg);border:6px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.12)}
 .hero-photos .seal{top:auto;bottom:6px;width:58px;height:58px;font-size:18px}
-.date-strip{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px;font-family:var(--f-serif);color:var(--wine)}
-.date-strip .d{font-size:40px;line-height:1;font-weight:500}
-.date-strip .side{font-size:13px;letter-spacing:.2em;text-transform:uppercase;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 10px}
+.date-wd{margin-top:26px;font-family:var(--f-serif);font-size:20px;font-weight:500;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--wine-deep)}
+.date-strip{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:8px;font-family:var(--f-serif);color:var(--wine)}
+.date-strip .d{font-size:78px;line-height:1;font-weight:600;color:var(--wine-deep)}
+.date-strip .side{font-size:15px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-top:1.5px solid var(--wine);border-bottom:1.5px solid var(--wine);padding:6px 8px;color:var(--wine-deep)}
 .lunar{font-size:12.5px;color:var(--muted);margin-top:8px}
 
 /* ---------- Gia đình ---------- */
@@ -212,6 +213,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
       <div class="photo p2" data-photo="cover2"></div>
       <div class="seal" data-bind="monogram"></div>
     </div>
+    <div class="date-wd reveal">Chủ nhật</div>
     <div class="date-strip reveal">
       <span class="side">Tháng 12</span>
       <span class="d">20</span>
