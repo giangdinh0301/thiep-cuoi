@@ -147,16 +147,6 @@ form .btn{width:100%;margin-top:18px}
 .msg{display:none;margin-top:16px;padding:14px;border-radius:6px;background:#F3E9E4;color:var(--wine);font-size:13px;text-align:center}
 .msg.on{display:block}
 
-/* ---------- Hoa trang trí ---------- */
-.flo{position:absolute;pointer-events:none;z-index:0;color:var(--gold);--petal:rgba(183,110,110,.12);opacity:.85}
-.fd .fo{fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.fd .fo.bg{fill:var(--petal)}
-.fd .fo.nf{fill:none}
-.fd .fh{fill:none;stroke:currentColor;stroke-width:.55;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.85}
-.flo.t{width:60px;height:180px}.flo.b{width:126px;height:180px}
-.flpad{padding-bottom:178px}
-.flo.fl-r{right:-14px}.flo.fl-l{left:-14px}.flo.fl-flip{transform:scaleX(-1)}
-
 /* ---------- Cảm ơn ---------- */
 .thanks{background:var(--wine);color:#fff;padding:0;overflow:hidden}
 .thanks .tph{position:relative;width:100%;aspect-ratio:2/3;background:var(--wine)}
@@ -217,9 +207,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 <main class="card">
 
   <!-- 1. Hero -->
-  <section class="hero flpad">
-    <svg class="flo t fl-l" style="top:112px;width:46px;height:138px" viewBox="0 0 100 300" aria-hidden="true"><use href="#fl-tulip"/></svg>
-    <svg class="flo b fl-r" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section class="hero">
     <div class="std">SAVE THE DATE</div>
     <h1 class="script names reveal"><span data-bind="firstShort"></span><span class="amp">&amp;</span><span data-bind="secondShort"></span></h1>
     <div class="divider">❦</div>
@@ -239,8 +227,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 2. Thông tin lễ cưới -->
-  <section class="flpad">
-    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section>
     <h2 class="sec reveal">Thông tin lễ cưới</h2>
     <div class="sub reveal">Hai mái nhà, một gia đình</div>
     <div class="family reveal" id="family"></div>
@@ -250,8 +237,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 3. Lịch + đếm ngược -->
-  <section class="flpad" style="background:var(--paper)">
-    <svg class="flo b fl-r" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section style="background:var(--paper)">
     <h2 class="sec reveal">Ngày chung đôi</h2>
     <div class="sub reveal">Tháng 12 năm 2026</div>
     <div class="cal reveal" style="background:#fff">
@@ -267,8 +253,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 4. Sự kiện -->
-  <section class="flpad">
-    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section>
     <h2 class="sec reveal">Thời gian &amp; địa điểm</h2>
     <div class="sub reveal">Rất mong được đón tiếp bạn</div>
     <div class="events" id="events"></div>
@@ -283,16 +268,14 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 5. Album -->
-  <section class="flpad" style="background:var(--paper)">
-    <svg class="flo b fl-r" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section style="background:var(--paper)">
     <h2 class="sec reveal">Album ảnh cưới</h2>
     <div class="sub reveal">Những khoảnh khắc chúng mình muốn giữ mãi</div>
     <div class="album reveal" id="album"></div>
   </section>
 
   <!-- 6. RSVP -->
-  <section id="rsvp" class="flpad">
-    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 300 430" aria-hidden="true"><use href="#fl-bouq"/></svg>
+  <section id="rsvp">
     <h2 class="sec reveal">Xác nhận tham dự</h2>
     <div class="sub reveal">Bạn vui lòng phản hồi sớm để gia đình chuẩn bị chu đáo nhé</div>
     <form id="rsvpForm" class="reveal" novalidate>
@@ -329,45 +312,6 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 
 <div id="lightbox"><button class="x" aria-label="Đóng">×</button><div id="lbInner"></div></div>
 
-<script>
-/* Hoa tulip nét khắc — dựng bằng mã (symbol #fl-bouq, #fl-tulip) */
-(function(){
-const lerp=(a,b,t)=>a+(b-a)*t, f2=v=>String(+v.toFixed(1));
-function bez(P,t){const u=1-t;return [u*u*u*P[0][0]+3*u*u*t*P[1][0]+3*u*t*t*P[2][0]+t*t*t*P[3][0],u*u*u*P[0][1]+3*u*u*t*P[1][1]+3*u*t*t*P[2][1]+t*t*t*P[3][1]];}
-function dc(pts,t){const l=[pts[0]],r=[pts[pts.length-1]];let cur=pts;while(cur.length>1){cur=cur.slice(1).map((p,i)=>[lerp(cur[i][0],p[0],t),lerp(cur[i][1],p[1],t)]);l.push(cur[0]);r.unshift(cur[cur.length-1]);}return [l,r];}
-function split(P,t0,t1){const l=dc(P,t1)[0];return dc(l,t0/t1)[1];}
-const pathB=P=>`M${f2(P[0][0])} ${f2(P[0][1])}C${P.slice(1).map(p=>f2(p[0])+" "+f2(p[1])).join(" ")}`;
-const mix=(A,B,f)=>A.map((a,i)=>[lerp(a[0],B[i][0],f),lerp(a[1],B[i][1],f)]);
-function smooth(pts){let d=`M${f2(pts[0][0])} ${f2(pts[0][1])}`;for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||pts[i+1];d+=`C${f2(p1[0]+(p2[0]-p0[0])/6)} ${f2(p1[1]+(p2[1]-p0[1])/6)} ${f2(p2[0]-(p3[0]-p1[0])/6)} ${f2(p2[1]-(p3[1]-p1[1])/6)} ${f2(p2[0])} ${f2(p2[1])}`;}return d;}
-function normal(P,t){const a=bez(P,Math.max(t-.01,0)),b=bez(P,Math.min(t+.01,1));const dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1;return [-dy/l,dx/l];}
-const prof=(W,t,sk)=>W*Math.pow(Math.sin(Math.PI*Math.pow(t,1-sk*.6)),.85);
-function leaf(P,W,skew,hatch,side){const N=26,L=[],R=[],C=[];for(let i=0;i<=N;i++){const t=i/N,c=bez(P,t),n=normal(P,t),w=prof(W,t,skew);C.push(c);L.push([c[0]+n[0]*w,c[1]+n[1]*w]);R.push([c[0]-n[0]*w,c[1]-n[1]*w]);}
- const outline=smooth(L)+smooth(R.slice().reverse()).replace("M","L")+"Z",rib=smooth(C.slice(2,-2));let hs="";
- for(let k=0;k<hatch;k++){const t=.12+.7*k/hatch,c=bez(P,t),n=normal(P,t),w=prof(W,t,skew)*.92,tt=Math.min(t+.12,.97),c2=bez(P,tt),n2=normal(P,tt);
-  const a=[c[0]+n[0]*side*w,c[1]+n[1]*side*w],b=[lerp(c[0],c2[0],.55)+n2[0]*side*w*.35,lerp(c[1],c2[1],.55)+n2[1]*side*w*.35];hs+=`M${f2(a[0])} ${f2(a[1])}L${f2(b[0])} ${f2(b[1])}`;}
- return `<path d="${outline}" class="fo"/><path d="${rib}" class="fh"/><path d="${hs}" class="fh"/>`;}
-function stem(P){const N=20,L=[],R=[];for(let i=0;i<=N;i++){const t=i/N,c=bez(P,t),n=normal(P,t);L.push([c[0]+n[0]*1.3,c[1]+n[1]*1.3]);R.push([c[0]-n[0]*1.3,c[1]-n[1]*1.3]);}return `<path d="${smooth(L)}" class="fo"/><path d="${smooth(R)}" class="fo"/>`;}
-const mir=P=>P.map(p=>[-p[0],p[1]]);
-const OL=[[-5,0],[-36,-8],[-40,-60],[-15,-100]],OR=mir(OL),SEL=[[-3,-2],[-26,-26],[-27,-72],[-15,-100]],SER=mir(SEL),CL=[[0,-79],[-11,-62],[-11,-30],[-2,-3]],CR=mir(CL);
-function tulip(x,y,rot,s){const sil=`M-5 0C-36 -8 -40 -60 -15 -100C-11 -92 -5 -84 0 -79C5 -84 11 -92 15 -100C40 -60 36 -8 5 0Z`;
- const out=[pathB(SEL),pathB(SER),pathB(CL),pathB(CR),"M-15 -100C-13 -84 -9 -66 -6 -44M15 -100C13 -84 9 -66 6 -44"].join("");let hat="";
- for(let k=1;k<=10;k++){const f=k/11*.62;hat+=pathB(split(mix(OL,SEL,f),.10,.84-.25*f))+pathB(split(mix(OR,SER,f),.10,.84-.25*f));}
- for(let k=1;k<=5;k++){const f=.08+k*.07;hat+=pathB(split(mix(SEL,CL,f),.28,.8))+pathB(split(mix(SER,CR,f),.28,.8));}
- return `<g transform="translate(${f2(x)} ${f2(y)}) rotate(${rot}) scale(${f2(s)} ${f2(s)})"><path d="${sil}" class="fo bg"/><path d="${out}" class="fo nf"/><path d="${hat}" class="fh"/></g>`;}
-const tang=P=>{const a=bez(P,.93),b=bez(P,1);return +(Math.atan2(b[0]-a[0],-(b[1]-a[1]))*180/Math.PI).toFixed(1);};
-const TS=(P,s)=>stem(P)+tulip(P[3][0],P[3][1],tang(P),s);
-function bouquet(){const B=[150,424];let g="";const L=(P,W,side,h)=>{g+=leaf(P,W,.5,h,side);};
- L([[148,424],[118,330],[150,250],[126,186]],8,1,12);g+=TS([B,[136,330],[120,226],[126,134]],.8);
- L([[148,424],[96,372],[22,338],[26,228]],11,1,14);L([[152,424],[206,368],[284,334],[268,236]],11,-1,14);
- g+=TS([B,[96,350],[58,286],[66,224]],.92);g+=TS([B,[200,350],[240,282],[236,204]],.95);g+=TS([B,[160,330],[176,230],[170,132]],1);
- L([[150,426],[98,414],[42,392],[6,430]],8,-1,10);L([[152,426],[204,416],[262,398],[296,360]],8,1,10);L([[150,426],[172,386],[192,336],[236,310]],8,-1,9);
- return `<symbol id="fl-bouq" class="fd" viewBox="0 0 300 430">${g}</symbol>`;}
-function single(){const B=[56,324];let g=leaf([[54,322],[12,284],[6,214],[30,160]],8,.5,12,1)+leaf([[58,322],[100,278],[104,212],[82,164]],8,.5,12,-1);
- const P=[B,[52,262],[62,196],[56,142]];g+=TS(P,1);return `<symbol id="fl-tulip" class="fd" viewBox="0 0 110 330">${g}</symbol>`;}
-const host=document.createElementNS("http://www.w3.org/2000/svg","svg");host.setAttribute("width","0");host.setAttribute("height","0");host.setAttribute("aria-hidden","true");host.style.position="absolute";
-host.innerHTML=`<defs>${bouquet()}${single()}</defs>`;document.body.insertBefore(host,document.body.firstChild);
-})();
-</script>
 <script>
 /* =========================================================
    CONFIG — THÔNG TIN THIỆP (sửa tại đây)
