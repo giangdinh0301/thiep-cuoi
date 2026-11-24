@@ -147,6 +147,13 @@ form .btn{width:100%;margin-top:18px}
 .msg{display:none;margin-top:16px;padding:14px;border-radius:6px;background:#F3E9E4;color:var(--wine);font-size:13px;text-align:center}
 .msg.on{display:block}
 
+/* ---------- Hoa trang trí ---------- */
+.flo{position:absolute;pointer-events:none;z-index:0;color:var(--gold);--petal:rgba(183,110,110,.13);opacity:.8}
+.fd,.fd *{fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.flo.t{width:66px;height:198px}.flo.b{width:132px;height:112px}
+.flpad{padding-bottom:112px}
+.flo.fl-r{right:-6px}.flo.fl-l{left:-6px}.flo.fl-flip{transform:scaleX(-1)}
+
 /* ---------- Cảm ơn ---------- */
 .thanks{background:var(--wine);color:#fff;padding:0;overflow:hidden}
 .thanks .tph{position:relative;width:100%;aspect-ratio:2/3;background:var(--wine)}
@@ -190,6 +197,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="fh" class="fd"><path d="M0 0C-22 -2 -28 -38 -22 -66C-14 -52 -7 -48 0 -54C7 -48 14 -52 22 -66C28 -38 22 -2 0 0Z" style="fill:var(--petal)"/><path d="M0 -54C-5 -34 -5 -14 0 0M-14 -57C-18 -36 -10 -13 0 0M14 -57C18 -36 10 -13 0 0M-20 -46C-17 -26 -9 -10 0 0M20 -46C17 -26 9 -10 0 0" /></g><g id="fl" class="fd"><path d="M0 0C-26 -34 -30 -84 -8 -128C-8 -84 -4 -36 0 0Z"/><path d="M-6 -16C-15 -46 -17 -80 -9 -112M-3 -10C-9 -40 -10 -72 -8 -100"/></g><g id="fb" class="fd"><g><ellipse style="fill:var(--petal)" cx="0" cy="-9" rx="5" ry="9"/><ellipse style="fill:var(--petal)" cx="0" cy="-9" rx="5" ry="9" transform="rotate(72)"/><ellipse style="fill:var(--petal)" cx="0" cy="-9" rx="5" ry="9" transform="rotate(144)"/><ellipse style="fill:var(--petal)" cx="0" cy="-9" rx="5" ry="9" transform="rotate(216)"/><ellipse style="fill:var(--petal)" cx="0" cy="-9" rx="5" ry="9" transform="rotate(288)"/></g><circle r="2.2"/></g><symbol id="fl-tulip" class="fd" viewBox="0 0 100 300"><path d="M50 130C46 190 56 240 51 292"/><use href="#fl" transform="translate(51 292) rotate(-14) scale(1.15)"/><use href="#fl" transform="translate(51 292) scale(-1.0 1.0) rotate(-16) scale(1.05)" /><use href="#fh" transform="translate(50 130) scale(1.15)"/></symbol><symbol id="fl-bouq" class="fd" viewBox="0 0 200 170"><path d="M58 166C60 130 80 100 96 84M58 166C52 130 52 104 56 82M58 166C90 140 124 116 142 90M58 166C40 140 30 124 28 112M58 166C110 150 150 136 168 118"/><use href="#fl" transform="translate(58 166) rotate(-62) scale(.62)"/><use href="#fl" transform="translate(58 166) rotate(52) scale(.55)"/><use href="#fh" transform="translate(96 84) rotate(8) scale(.78)"/><use href="#fh" transform="translate(56 82) rotate(-18) scale(.7)"/><use href="#fh" transform="translate(142 90) rotate(34) scale(.62)"/><use href="#fh" transform="translate(28 112) rotate(-48) scale(.5)"/><use href="#fh" transform="translate(168 118) rotate(58) scale(.48)"/><use href="#fb" transform="translate(120 52) scale(.9)"/><use href="#fb" transform="translate(22 66) scale(.7)"/><use href="#fb" transform="translate(180 76) scale(.6)"/></symbol></defs></svg>
 
 <!-- Bìa phong bì -->
 <div id="cover">
@@ -208,6 +216,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
 
   <!-- 1. Hero -->
   <section class="hero">
+    <svg class="flo t fl-l" style="top:112px;width:50px;height:150px" viewBox="0 0 100 300" aria-hidden="true"><use href="#fl-tulip"/></svg>
+    <svg class="flo b fl-r" style="bottom:-46px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <div class="std">SAVE THE DATE</div>
     <h1 class="script names reveal"><span data-bind="firstShort"></span><span class="amp">&amp;</span><span data-bind="secondShort"></span></h1>
     <div class="divider">❦</div>
@@ -227,7 +237,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 2. Thông tin lễ cưới -->
-  <section>
+  <section class="flpad">
+    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <h2 class="sec reveal">Thông tin lễ cưới</h2>
     <div class="sub reveal">Hai mái nhà, một gia đình</div>
     <div class="family reveal" id="family"></div>
@@ -237,7 +248,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 3. Lịch + đếm ngược -->
-  <section style="background:var(--paper)">
+  <section class="flpad" style="background:var(--paper)">
+    <svg class="flo b fl-r" style="bottom:-2px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <h2 class="sec reveal">Ngày chung đôi</h2>
     <div class="sub reveal">Tháng 12 năm 2026</div>
     <div class="cal reveal" style="background:#fff">
@@ -253,7 +265,8 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 4. Sự kiện -->
-  <section>
+  <section class="flpad">
+    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <h2 class="sec reveal">Thời gian &amp; địa điểm</h2>
     <div class="sub reveal">Rất mong được đón tiếp bạn</div>
     <div class="events" id="events"></div>
@@ -268,14 +281,16 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   </section>
 
   <!-- 5. Album -->
-  <section style="background:var(--paper)">
+  <section class="flpad" style="background:var(--paper)">
+    <svg class="flo b fl-r" style="bottom:-2px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <h2 class="sec reveal">Album ảnh cưới</h2>
     <div class="sub reveal">Những khoảnh khắc chúng mình muốn giữ mãi</div>
     <div class="album reveal" id="album"></div>
   </section>
 
   <!-- 6. RSVP -->
-  <section id="rsvp">
+  <section id="rsvp" class="flpad">
+    <svg class="flo b fl-l fl-flip" style="bottom:-2px" viewBox="0 0 200 170" aria-hidden="true"><use href="#fl-bouq"/></svg>
     <h2 class="sec reveal">Xác nhận tham dự</h2>
     <div class="sub reveal">Bạn vui lòng phản hồi sớm để gia đình chuẩn bị chu đáo nhé</div>
     <form id="rsvpForm" class="reveal" novalidate>
