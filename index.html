@@ -258,9 +258,9 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   <!-- 2. Thông tin lễ cưới -->
   <section>
     <h2 class="sec reveal">Thông tin lễ cưới</h2>
-    <div class="sub reveal">Hai mái nhà, một gia đình</div>
+    <div class="sub reveal">Khởi đầu cho hành trình chung đôi</div>
     <div class="family reveal" id="family"></div>
-    <p class="small muted reveal" style="margin-top:22px">Trân trọng báo tin lễ thành hôn của con chúng tôi</p>
+    <p class="small muted reveal" style="margin-top:22px">Trân trọng báo tin lễ thành hôn của hai con chúng tôi</p>
     <div class="couple reveal" id="couple"></div>
     <div class="quote reveal">Sự hiện diện của Quý vị là niềm vinh hạnh cho gia đình chúng tôi!</div>
   </section>
@@ -285,7 +285,7 @@ footer{text-align:center;padding:18px;font-size:11.5px;color:var(--muted);backgr
   <!-- 4. Sự kiện -->
   <section>
     <h2 class="sec reveal">Thời gian &amp; địa điểm</h2>
-    <div class="sub reveal">Rất mong được đón tiếp bạn</div>
+    <div class="sub reveal">Rất mong được đón tiếp</div>
     <div class="events" id="events"></div>
   </section>
 
@@ -414,7 +414,7 @@ const binds = {
   firstShort: first.short, secondShort: second.short,
   monogram: first.initial + "·" + second.initial,
   guest: guest || "Quý khách",
-  guestLine: guest ? guest + " đến dự lễ cưới của chúng mình" : "Bạn đến dự lễ cưới của chúng mình",
+  guestLine: guest ? guest + " đến dự lễ cưới của hai con chúng tôi" : "Bạn đến dự lễ cưới của hai con chúng tôi",
   coupleShort: first.short + " & " + second.short
 };
 document.querySelectorAll("[data-bind]").forEach(el => { const v = binds[el.dataset.bind]; if (v !== undefined) el.textContent = v; });
